@@ -1,7 +1,7 @@
 
 \input texinfo
 @c %**start of header
-@setfilename ../../info/org
+@setfilename ../output/org
 @settitle The Org Manual
 
 @set VERSION 7.5
@@ -293,7 +293,7 @@ license to the document, as described in section 6 of the license.
 @end direntry
 
 @titlepage
-@title The Org Manual
+@title The Org Manual Org 使用手册
 
 @subtitle Release @value{VERSION}
 @author by Carsten Dominik
@@ -309,46 +309,46 @@ with contributions by David O'Toole, Bastien Guerry, Philip Rooke, Dan Davison, 
 @contents
 
 @ifnottex
-@node Top, Introduction, (dir), (dir)
+@node Top, 简介, (dir), (dir)
 @top Org Mode Manual
 
 @insertcopying
 @end ifnottex
 
 @menu
-* Introduction::                Getting started
-* Document Structure::          A tree works like your brain
-* Tables::                      Pure magic for quick formatting
-* Hyperlinks::                  Notes in context
-* TODO Items::                  Every tree branch can be a TODO item
-* Tags::                        Tagging headlines and matching sets of tags
-* Properties and Columns::      Storing information about an entry
-* Dates and Times::             Making items useful for planning
-* Capture - Refile - Archive::  The ins and outs for projects
-* Agenda Views::                Collecting information into views
-* Markup::                      Prepare text for rich export
-* Exporting::                   Sharing and publishing of notes
-* Publishing::                  Create a web site of linked Org files
-* Working With Source Code::    Export, evaluate, and tangle code blocks
-* Miscellaneous::               All the rest which did not fit elsewhere
+* 简介::                Getting started入门指南
+* 文档结构::          A tree works like your brain像人脑一样思考的树状结构
+* 表格::                      Pure magic for quick formatting魔术般的快速格式化
+* 超链接::                  Notes in context正文中的注解
+* TODO 条目::                  Every tree branch can be a TODO item任何树状分支都可以是TODO条目
+* 标签::                        Tagging headlines and matching sets of tags标记标题和匹配标签集
+* Properties and Columns::      Storing information about an entry内容的储存信息
+* 时间日期::             Making items useful for planning使用条目进行规划
+* 抓取-分发-归档::  The ins and outs for projects项目的详情
+* 议程视图::                Collecting information into views收集信息到视图
+* 标记::                      Prepare text for rich export为导出做准备
+* 导出::                   Sharing and publishing of notes分享和发布笔记
+* 发布::                  Create a web site of linked Org files用Org文件建立网站
+* 与源代码共舞::    Export, evaluate, and tangle code blocks导出，求值和整合代码块
+* 杂项::               All the rest which did not fit elsewhere所有不适合其它地方的杂七杂八的东西
 * Hacking::                     How to hack your way around
-* MobileOrg::                   Viewing and capture on a mobile device
-* History and Acknowledgments::  How Org came into being
-* Main Index::                  An index of Org's concepts and features
-* Key Index::                   Key bindings and where they are described
-* Command and Function Index::  Command names and some internal functions
-* Variable Index::              Variables mentioned in the manual
+* 移动Org::                   Viewing and capture on a mobile device在移动设备上查看和抓取
+* 历史与致谢::  How Org came into beingOrg的来龙去脉
+* 主索引::                  An index of Org's concepts and features Org概念和特性的索引
+* 键索引::                   Key bindings and where they are described键绑定及说明
+* 命令和功能索引::  Command names and some internal functions命令以及内部功能
+* 变量索引::              Variables mentioned in the manual手册提到的变量
 
 @detailmenu
  --- The Detailed Node Listing ---
 
-Introduction
+简介
 
-* Summary::                     Brief summary of what Org does
-* Installation::                How to install a downloaded version of Org
-* Activation::                  How to activate Org for certain buffers
-* Feedback::                    Bug reports, ideas, patches etc.
-* Conventions::                 Type-setting conventions in the manual
+* 摘要::                     Brief summary of what Org does Org 功用简明摘要
+* 安装::                How to install a downloaded version of Org怎么安装下载到Org
+* 启动::                  How to activate Org for certain buffers怎么在特定的缓冲区激活Org
+* 反馈::                    Bug reports, ideas, patches etc.错误报告，想法，补丁等
+* 约定::                 Type-setting conventions in the manual手册的排版约定
 
 Document structure
 
@@ -736,24 +736,26 @@ MobileOrg
 @end detailmenu
 @end menu
 
-@node Introduction, Document Structure, Top, Top
-@chapter Introduction
+@node 简介, 文档结构, Top, Top
+@chapter 简介
 @cindex introduction
 
 @menu
-* Summary::                     Brief summary of what Org does
-* Installation::                How to install a downloaded version of Org
-* Activation::                  How to activate Org for certain buffers
-* Feedback::                    Bug reports, ideas, patches etc.
-* Conventions::                 Type-setting conventions in the manual
+* 摘要::                     Brief summary of what Org does
+* 安装::                How to install a downloaded version of Org
+* 启动::                  How to activate Org for certain buffers
+* 反馈::                    Bug reports, ideas, patches etc.
+* 约定::                 Type-setting conventions in the manual
 @end menu
 
-@node Summary, Installation, Introduction, Introduction
-@section Summary
+@node 摘要, 安装, 简介, 简介
+@section 摘要
 @cindex summary
 
 Org is a mode for keeping notes, maintaining TODO lists, and doing
 project planning with a fast and effective plain-text system.
+Org 是EMACS的一个模式，利用快速高效的纯文本系统进行笔记记录，TODO列表维护
+和项目安排。
 
 Org develops organizational tasks around NOTES files that contain
 lists or information about projects as plain text.  Org is
@@ -769,14 +771,28 @@ For printing and sharing of notes, an Org file can be exported as a
 structured ASCII file, as HTML, or (TODO and agenda items only) as an
 iCalendar file.  It can also serve as a publishing tool for a set of
 linked web pages.
+Org 围绕包含列表或者项目信息的纯文本笔记文件进行组织任务。Org是在Outline
+模式上实现的，因此使大文件的内容保持结构化。可视性循环和结构化编辑有助于
+与树状结构一起工作.内置的表格编辑器很容易生成表格。Org支持TODO条目，截止
+期限，时间戳以及形成安排。利用和平滑地结合了Emacs的日历和日记动态生成议程
+视图。纯文本类URL链接到网站，电子邮件，Usenet信息，BBDB条目以及任何其他项
+目相关文件。Org文件可以导出为ASCII文件，超文本链接HTML，或者iCalendar文件
+（只适用与TODO和议程条目），以方便共享和印刷。同样它也可以作为网站的发布
+工具。
 
 As a project planning environment, Org works by adding metadata to outline
 nodes.  Based on this data, specific entries can be extracted in queries and
 create dynamic @i{agenda views}.
+作为一个项目规划环境，Org通过在大纲节点中加入元数据进行工作。基于这个数据，特
+定的条目可以被查询并抽取出来建立动态@i{议程视图}。
+
 
 Org mode contains the Org Babel environment which allows you to work with
 embedded source code blocks in a file, to facilitate code evaluation,
 documentation, and literate programming techniques.
+
+Org 模式包含的Org Bable环境可以在文件中嵌入源代码块，便于代码求值，文档化以及
+传授编程技巧。
 
 Org's automatic, context-sensitive table editor with spreadsheet
 capabilities can be integrated into any major mode by activating the
@@ -784,23 +800,28 @@ minor Orgtbl mode.  Using a translation step, it can be used to maintain
 tables in arbitrary file types, for example in @LaTeX{}.  The structure
 editing and list creation capabilities can be used outside Org with
 the minor Orgstruct mode.
+Org的自动化上下文相关的表格编辑器与电子表格能力可以通过激活次要Orgtbl模式（Orgtabl-mode）结合
+到任何主要模式中(Major mode)。
 
 Org keeps simple things simple.  When first fired up, it should
 feel like a straightforward, easy to use outliner.  Complexity is not
 imposed, but a large amount of functionality is available when you need
 it.  Org is a toolbox and can be used in different ways and for different
 ends, for example:
+Org让简单的事情保持简单。咋一看她像直观易用的大纲工具。不强加复杂性，但是当你
+需要的时候有大量的功能可供使用。Org是一个工具箱，可以通过不同的途径应用到不同
+的地方去，例如：
 
 @example
-@r{@bullet{} an outline extension with visibility cycling and structure editing}
-@r{@bullet{} an ASCII system and table editor for taking structured notes}
-@r{@bullet{} a TODO list editor}
-@r{@bullet{} a full agenda and planner with deadlines and work scheduling}
+@r{@bullet{} an outline extension with visibility cycling and structure editing作为一个拥有可视性循环和结构编辑的扩展}
+@r{@bullet{} an ASCII system and table editor for taking structured notes进行结构化笔记的ASCII系统和表格编辑器}
+@r{@bullet{} a TODO list editor作为TODO列表编辑器}
+@r{@bullet{} a full agenda and planner with deadlines and work scheduling一个具有截止期限和工作安排的议程表}
 @pindex GTD, Getting Things Done
-@r{@bullet{} an environment in which to implement David Allen's GTD system}
-@r{@bullet{} a simple hypertext system, with HTML and @LaTeX{} export}
-@r{@bullet{} a publishing tool to create a set of interlinked webpages}
-@r{@bullet{} an environment for literate programming}
+@r{@bullet{} an environment in which to implement David Allen's GTD system一个用来显示David Allen's GTD系统的环境}
+@r{@bullet{} a simple hypertext system, with HTML and @LaTeX{} export一个简单的支持HTML和@LaTeX{}导出的超文本系统}
+@r{@bullet{} a publishing tool to create a set of interlinked webpages作为一个建立相互链接的网页集的发布工具}
+@r{@bullet{} an environment for literate programming作为文学化编程环境}
 @end example
 
 
@@ -809,17 +830,20 @@ There is a website for Org which provides links to the newest
 version of Org, as well as additional information, frequently asked
 questions (FAQ), links to tutorials, etc@.  This page is located at
 @uref{http://orgmode.org}.
+Org主页提供最新版本Org的链接以及相关信息，常见问题（FAQ），教程等。主页地址为
+@uref{http://orgmode.org}。
+
 
 @cindex print edition
 The version 7.3 of this manual is available as a
-@uref{http://www.network-theory.co.uk/org/manual/, paperback book from Network
-Theory Ltd.}
+这里有一本7.3版本的来自
+@uref{http://www.network-theory.co.uk/org/manual/, Network Theory Ltd.}平装版手册
 
 @page
 
 
-@node Installation, Activation, Summary, Introduction
-@section Installation
+@node 安装, 启动, 摘要, 简介
+@section 安装
 @cindex installation
 @cindex XEmacs
 
@@ -828,6 +852,8 @@ distribution or an XEmacs package, please skip this section and go directly
 to @ref{Activation}.  To see what version of Org (if any) is part of your
 Emacs distribution, type @kbd{M-x load-library RET org} and then @kbd{M-x
 org-version}.}
+@b{重要：}@i{如果你是用的Org版本是Emacs发行版或者Xmacs包的一部分，请跳过本节直接阅读@ref{启动}。
+要知道所使用的Org的版本（如果有）是否属于Emacs发行版的，键入@kbd{M-x load-library RET org}然后@kbd{M-x org-version}。}
 
 If you have downloaded Org from the Web, either as a distribution @file{.zip}
 or @file{.tar} file, or as a Git archive, you must take the following steps
@@ -838,6 +864,11 @@ directories where local Lisp and Info files are kept.  If you don't have
 access to the system-wide directories, you can simply run Org directly from
 the distribution directory by adding the @file{lisp} subdirectory to the
 Emacs load path.  To do this, add the following line to @file{.emacs}:
+如果你是从网络上下载Org的，无论是发行版@file.{.zip}或@file.{zip}文件，还是Git档案库，
+你需要进行一下步骤进行安装：进入解压出来的目录编辑文件@file{Makefile}最上面一节。指定 Emacs
+执行文件的名字（一般不是@file{emacs}就是@file{xemacs})，以及本地Lisp和Info文件所在的目录。如果
+你没有权限访问系统目录，你可以通过把子目录@file{lisp}添加到Emacs的装载路径（load-path）中然后
+直接在解压出来的目录下运行。把下面的语句添加到@file{.emacs}文件中：
 
 @example
 (setq load-path (cons "~/path/to/orgdir/lisp" load-path))
@@ -846,12 +877,14 @@ Emacs load path.  To do this, add the following line to @file{.emacs}:
 @noindent
 If you plan to use code from the @file{contrib} subdirectory, do a similar
 step for this directory:
+如果你打算用@file{contrib}里面的代码，重复类似的步骤。
 
 @example
 (setq load-path (cons "~/path/to/orgdir/contrib/lisp" load-path))
 @end example
 
 @noindent Now byte-compile the Lisp files with the shell command:
+@noindent 然后字节化编译lisp文件：
 
 @example
 make
@@ -860,6 +893,8 @@ make
 @noindent If you are running Org from the distribution directory, this is
 all.  If you want to install Org into the system directories, use (as
 administrator)
+@noident 如果你是在发行目录运行Org，到这就完成了。如果你需要把Org安装到系统目录中，以管理员身份
+运行一下命令。
 
 @example
 make install
@@ -871,6 +906,8 @@ correct directory and modifies the info directory file.  In many other
 systems, the files need to be copied to the correct directory separately, and
 @file{install-info} then only modifies the directory file.  Check your system
 documentation to find out which of the following commands you need:
+安装Info文件因系统而异，因为不同系统的@file{install-info}程序存在差异。在Debian中它把info文件
+复制到正确的目录并改变info目录文件。在很多其他系统，这些文件需要分别复制到相应的目录，@file{install-info}只负责改动info目录文件。检查你的系统文档找出你需要下面命令中的哪一个：
 
 @example
 make install-info
@@ -880,15 +917,17 @@ make install-info-debian
 Then add the following line to @file{.emacs}.  It is needed so that
 Emacs can autoload functions that are located in files not immediately loaded
 when Org-mode starts.
+把下面这行加入到文件@file{.emacs}中。这样Emacs可以自动装载那些在Org-mode开始时没有立即装载的文件中的函数。
 @lisp
 (require 'org-install)
 @end lisp
 
 Do not forget to activate Org as described in the following section.
+别忘记按照接下来的章节来启动Org。
 @page
 
-@node Activation, Feedback, Installation, Introduction
-@section Activation
+@node 启动, 反馈, 安装, 简介
+@section 启动
 @cindex activation
 @cindex autoload
 @cindex global key bindings
@@ -896,18 +935,25 @@ Do not forget to activate Org as described in the following section.
 
 To make sure files with extension @file{.org} use Org mode, add the following
 line to your @file{.emacs} file.
+在@file{.emacs}文件中加入以下语句，使带扩展名@file{.org}的文件使用Org模式。
+
 @lisp
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 @end lisp
 @noindent Org mode buffers need font-lock to be turned on - this is the
 default in Emacs@footnote{If you don't use font-lock globally, turn it on in
 Org buffer with @code{(add-hook 'org-mode-hook 'turn-on-font-lock)}}.
+@noindent Org模式缓冲区需要打开font-lock-这是Emacs的默认行为@footnote{如果你不想全局
+使用font-lock，可以只在Org缓冲区打开它@code{(add-hook 'org-mode-hook 'turn-on-font-lock)}}
 
 The four Org commands @command{org-store-link}, @command{org-capture},
 @command{org-agenda}, and @command{org-iswitchb} should be accessible through
 global keys (i.e.@: anywhere in Emacs, not just in Org buffers).  Here are
 suggested bindings for these keys, please modify the keys to your own
 liking.
+@command{org-store-link}, @command{org-capture},@command{org-agenda}以及 @command{org-iswitchb}
+这四个命令可以通过全局快捷键访问（i.e.@:在Emacs的任何地方而不是局限于Org缓冲区）。这是建议的快捷键
+绑定方式，可以根据自己的喜好自行修改。
 @lisp
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-cc" 'org-capture)
@@ -919,7 +965,8 @@ liking.
 With this setup, all files with extension @samp{.org} will be put
 into Org-mode.  As an alternative, make the first line of a file look
 like this:
-
+这样设置后，所有带扩展名@samp{.org}的文件都会使用Org模式(Org-mode). 另外一种的方式是让文件的第一行
+类似与以下形式：
 @example
 MY PROJECTS    -*- mode: org; -*-
 @end example
@@ -927,6 +974,7 @@ MY PROJECTS    -*- mode: org; -*-
 @vindex org-insert-mode-line-in-empty-file
 @noindent which will select Org-mode for this buffer no matter what
 the file's name is.  See also the variable
+@noindent 这样无论文件名是什么都会选择Org模式。请参见变量
 @code{org-insert-mode-line-in-empty-file}.
 
 Many commands in Org work on the region if the region is @i{active}.  To make
@@ -940,7 +988,7 @@ in Emacs 22 you need to do this yourself with
 active region by using the mouse to select a region, or pressing
 @kbd{C-@key{SPC}} twice before moving the cursor.
 
-@node Feedback, Conventions, Activation, Introduction
+@node 反馈, 约定, 启动, 简介
 @section Feedback
 @cindex feedback
 @cindex bug reports
@@ -1011,7 +1059,7 @@ screen.  Save this buffer to a file (for example using @kbd{C-x C-w}) and
 attach it to your bug report.
 @end enumerate
 
-@node Conventions,  , Feedback, Introduction
+@node 约定,  , 反馈, 简介
 @section Typesetting conventions used in this manual
 
 Org uses three types of keywords: TODO keywords, tags, and property
@@ -1044,7 +1092,7 @@ be listed to call org-table-move-column-right.
 If you prefer, you can compile the manual without the command names by
 unsetting the flag @code{cmdnames} in @file{org.texi}.
 
-@node Document Structure, Tables, Introduction, Top
+@node 文档结构, 表格, 简介, Top
 @chapter Document structure
 @cindex document structure
 @cindex structure of document
@@ -1066,7 +1114,7 @@ edit the structure of the document.
 * Orgstruct mode::              Structure editing outside Org
 @end menu
 
-@node Outlines, Headlines, Document Structure, Document Structure
+@node Outlines, Headlines, 文档结构, 文档结构
 @section Outlines
 @cindex outlines
 @cindex Outline mode
@@ -1080,7 +1128,7 @@ currently being worked on.  Org greatly simplifies the use of
 outlines by compressing the entire show/hide functionality into a single
 command, @command{org-cycle}, which is bound to the @key{TAB} key.
 
-@node Headlines, Visibility cycling, Outlines, Document Structure
+@node Headlines, Visibility cycling, Outlines, 文档结构
 @section Headlines
 @cindex headlines
 @cindex outline tree
@@ -1116,7 +1164,7 @@ least two empty lines, one empty line will remain visible after folding
 the subtree, in order to structure the collapsed view.  See the
 variable @code{org-cycle-separator-lines} to modify this behavior.
 
-@node Visibility cycling, Motion, Headlines, Document Structure
+@node Visibility cycling, Motion, Headlines, 文档结构
 @section Visibility cycling
 @cindex cycling, visibility
 @cindex visibility cycling
@@ -1230,7 +1278,7 @@ requested by startup options and @samp{VISIBILITY} properties in individual
 entries.
 @end table
 
-@node Motion, Structure editing, Visibility cycling, Document Structure
+@node Motion, Structure editing, Visibility cycling, 文档结构
 @section Motion
 @cindex motion, between headlines
 @cindex jumping, to headlines
@@ -1270,7 +1318,7 @@ q            @r{Quit}
 See also the variable @code{org-goto-interface}.
 @end table
 
-@node Structure editing, Sparse trees, Motion, Document Structure
+@node Structure editing, Sparse trees, Motion, 文档结构
 @section Structure editing
 @cindex structure editing
 @cindex headline, promotion and demotion
@@ -1398,7 +1446,7 @@ inside a table (@pxref{Tables}), the Meta-Cursor keys have different
 functionality.
 
 
-@node Sparse trees, Plain lists, Structure editing, Document Structure
+@node Sparse trees, Plain lists, Structure editing, 文档结构
 @section Sparse trees
 @cindex sparse trees
 @cindex trees, sparse
@@ -1472,7 +1520,7 @@ XEmacs uses selective display for outlining, not text properties.}.
 Or you can use the command @kbd{C-c C-e v} to export only the visible
 part of the document and print the resulting file.
 
-@node Plain lists, Drawers, Sparse trees, Document Structure
+@node Plain lists, Drawers, Sparse trees, 文档结构
 @section Plain lists
 @cindex plain lists
 @cindex lists, plain
@@ -1677,7 +1725,7 @@ Sort the plain list.  You will be prompted for the sorting method:
 numerically, alphabetically, by time, or by custom function.
 @end table
 
-@node Drawers, Blocks, Plain lists, Document Structure
+@node Drawers, Blocks, Plain lists, 文档结构
 @section Drawers
 @cindex drawers
 @cindex #+DRAWERS
@@ -1715,7 +1763,7 @@ want to store a quick note in the LOGBOOK drawer, in a similar way to state chan
 Add a time-stamped note to the LOGBOOK drawer.
 @end table
 
-@node Blocks, Footnotes, Drawers, Document Structure
+@node Blocks, Footnotes, Drawers, 文档结构
 @section Blocks
 
 @vindex org-hide-block-startup
@@ -1734,7 +1782,7 @@ or on a per-file basis by using
 #+STARTUP: nohideblocks
 @end example
 
-@node Footnotes, Orgstruct mode, Blocks, Document Structure
+@node Footnotes, Orgstruct mode, Blocks, 文档结构
 @section Footnotes
 @cindex footnotes
 
@@ -1842,7 +1890,7 @@ Footnote labels are also links to the corresponding definition/reference, and
 you can use the usual commands to follow these links.
 @end table
 
-@node Orgstruct mode,  , Footnotes, Document Structure
+@node Orgstruct mode,  , Footnotes, 文档结构
 @section The Orgstruct minor mode
 @cindex Orgstruct mode
 @cindex minor mode for structure editing
@@ -1867,7 +1915,7 @@ lines, Orgstruct mode lurks silently in the shadows.  When you use
 settings into that mode, and detect item context after the first line of an
 item.
 
-@node Tables, Hyperlinks, Document Structure, Top
+@node Tables, Hyperlinks, 文档结构, Top
 @chapter Tables
 @cindex tables
 @cindex editing tables
@@ -14835,7 +14883,7 @@ last pull.  This might include a file that is not currently in your list of
 agenda files.  If you later use @kbd{C-c a ?} to regenerate the view, only
 the current agenda files will be searched.} using @kbd{C-c a ?}.
 
-@node History and Acknowledgments, Main Index, MobileOrg, Top
+@node History and Acknowledgments, 主索引, MobileOrg, Top
 @appendix History and acknowledgments
 @cindex acknowledgments
 @cindex history
@@ -15125,22 +15173,22 @@ and contributed various ideas and code snippets.
 @end itemize
 
 
-@node Main Index, Key Index, History and Acknowledgments, Top
+@node 主索引, 键索引, 历史和致谢, Top
 @unnumbered Concept index
 
 @printindex cp
 
-@node Key Index, Command and Function Index, Main Index, Top
+@node 键索引, 命令和功能索引, 主索引, Top
 @unnumbered Key index
 
 @printindex ky
 
-@node Command and Function Index, Variable Index, Key Index, Top
+@node 命令和功能索引, 变量索引, 键索引, Top
 @unnumbered Command and function index
 
 @printindex fn
 
-@node Variable Index,  , Command and Function Index, Top
+@node 变量索引,  , 命令和功能索引, Top
 @unnumbered Variable index
 
 This is not a complete index of variables and faces, only the ones that are
