@@ -987,9 +987,17 @@ in Emacs 22 you need to do this yourself with
 @noindent If you do not like @code{transient-mark-mode}, you can create an
 active region by using the mouse to select a region, or pressing
 @kbd{C-@key{SPC}} twice before moving the cursor.
+如果区域是@i{活动的}，Org很多命令是作用于区域的。为了使用这些命令，你需要打开
+@code{transient-mark-mode}（在XEmacs是@code{zmacs-regions}）。在Emacs 23这是默
+认的，在Emacs 22你需要用下面代码自己打开：
+@lisp
+(transient-mark-mode 1)
+@end lisp
+@noindent 如果你不喜欢@code{transient-mark-mode}，你可以通过鼠标选定一个区域来
+建立一个活动区域，或者在移动光标前按两次@kbd{C-@key{SPC}}。
 
 @node 反馈, 约定, 启动, 简介
-@section Feedback
+@section 反馈
 @cindex feedback
 @cindex bug reports
 @cindex maintainer
@@ -1001,6 +1009,10 @@ If you are not a member of the mailing list, your mail will be passed to the
 list after a moderator has approved it@footnote{Please consider subscribing
 to the mailing list, in order to minimize the work the mailing list
 moderators have to do.}.
+如果你发现任何Org的问题，或者你有任何关于它的疑问，评论或者想法，请发送邮件
+到Org的邮件列表 @email{emacs-orgmode@gnu.org}。如果你不是邮件列表的成员，你
+的邮件将会在筛选人批准后投递到列表里@footnote{请考虑订阅邮件列表以减少筛选人
+的工作量}。
 
 For bug reports, please first try to reproduce the bug with the latest
 version of Org available---if you are running an outdated version, it is
@@ -1009,16 +1021,25 @@ prepare a report and provide as much information as possible, including the
 version information of Emacs (@kbd{M-x emacs-version @key{RET}}) and Org
 (@kbd{M-x org-version @key{RET}}), as well as the Org related setup in
 @file{.emacs}.  The easiest way to do this is to use the command
+报告BUGS前，请先使用最新的Org版本重现这个BUG————如果你使用的是过时的版本，很有
+可能BUG已经被修复。如果BUG依然存在，请准备一份提供尽可能多信息的报告，包括Emacs
+的版本信息(@kdb{M-x emacs-version @key{RET}})以及Org版本(@kbd{M-x org-version @key{RET}}),
+还有@file{.emacs}中Org相关的设置。最方便的做法是运用命令
 @example
 @kbd{M-x org-submit-bug-report}
 @end example
 @noindent which will put all this information into an Emacs mail buffer so
 that you only need to add your description.  If you re not sending the Email
 from within Emacs, please copy and paste the content into your Email program.
+@noindent 他会把所有这些信息放到一个Emacs的邮件缓冲区里，你只需要在上面添加你
+的描述。如果你不是通过Emacs发送邮件，请把内容复制粘贴到你的邮件发送程序中。
 
 If an error occurs, a backtrace can be very useful (see below on how to
 create one).  Often a small example file helps, along with clear information
 about:
+出现错误时，回溯信息很重要（可以参照下面建立）。通常一个包含以下信息的示例文件
+会有很大帮助。
+
 
 @enumerate
 @item What exactly did you do?
@@ -1026,8 +1047,9 @@ about:
 @item What happened instead?
 @end enumerate
 @noindent Thank you for helping to improve this program.
+@noindent 感谢你帮助改进这个问题。
 
-@subsubheading How to create a useful backtrace
+@subsubheading How to create a useful backtrace怎样建立有用的回溯
 
 @cindex backtrace of an error
 If working with Org produces an error with a message you don't
@@ -1035,49 +1057,65 @@ understand, you may have hit a bug.  The best way to report this is by
 providing, in addition to what was mentioned above, a @emph{backtrace}.
 This is information from the built-in debugger about where and how the
 error occurred.  Here is how to produce a useful backtrace:
+如果Org在工作中产生一个你看不懂的信息，很肯能是碰到一个bug。最好的报告方法
+是除了提供上述所说的外，另外再提供@emph{回溯}。这些是内置的除错器给出的
+关于错误在哪里以及怎么发生的信息。下面是怎么产生这些有用的回溯：
+
 
 @enumerate
 @item
 Reload uncompiled versions of all Org-mode Lisp files.  The backtrace
 contains much more information if it is produced with uncompiled code.
 To do this, use
+重新载入所有没有编译过的Org模式的问Lisp文件。使用没编译过的代码回溯可
+以提供更多的信息。通过以下命令实现
 @example
 C-u M-x org-reload RET
 @end example
 @noindent
 or select @code{Org -> Refresh/Reload -> Reload Org uncompiled} from the
 menu.
+或者在菜单中选择 @code{Org -> Refresh/Reload -> Reload Org uncompiled}。 
 @item
 Go to the @code{Options} menu and select @code{Enter Debugger on Error}
 (XEmacs has this option in the @code{Troubleshooting} sub-menu).
+在 @code{Options}菜单中选择 @code{Enter Debugger on Error}（XEmacs 中这个
+选项是在 @code{Troubleshooting}子菜单中）。
 @item
 Do whatever you have to do to hit the error.  Don't forget to
 document the steps you take.
+进行可以产生错误的动作，记录你所做的每一步。
 @item
 When you hit the error, a @file{*Backtrace*} buffer will appear on the
 screen.  Save this buffer to a file (for example using @kbd{C-x C-w}) and
 attach it to your bug report.
+当你碰到错误时，屏幕会出现一个 @file{*Backtrace*}的缓冲区。把这个缓冲区
+保存到一个文件（例如用 @kdb{C-x C-w}）并附在你的bug报告中。
 @end enumerate
 
 @node 约定,  , 反馈, 简介
-@section Typesetting conventions used in this manual
+@section 本手册的排版约定
 
 Org uses three types of keywords: TODO keywords, tags, and property
 names.  In this manual we use the following conventions:
+Org采用了3种关键字：TODO关键字，标签以及属性名字。本手册采用以下约定：
 
 @table @code
 @item TODO
 @itemx WAITING
 TODO keywords are written with all capitals, even if they are
 user-defined.
+TODO关键字全部大写，哪怕是用户自定义的。
 @item boss
 @itemx ARCHIVE
 User-defined tags are written in lowercase; built-in tags with special
 meaning are written with all capitals.
+用户定义的标签小写；内置有特殊意义的标签全部大写。
 @item Release
 @itemx PRIORITY
 User-defined properties are capitalized; built-in properties with
 special meaning are written with all capitals.
+用户定义属性首字母大写；内置有特殊意义的属性全部大写。
 @end table
 
 The manual lists both the keys and the corresponding commands for accessing
@@ -1088,34 +1126,39 @@ give the function that is internally called by the generic command.  For
 example, in the chapter on document structure, @kbd{M-@key{right}} will be
 listed to call @code{org-do-demote}, while in the chapter on tables, it will
 be listed to call org-table-move-column-right.
+为了便于访问，手册把快捷键以及相应命令都列出来。Org根据上下文不同，通常会使用
+相同的键做不同的事情。绑定到这类键的命令有一个通用性的名字，像 @code{org-metaright}。
+手册中我们尽可能给出通用命令内部所调用的函数。例如，在文档结构的章节，@kbd{M-@key{right}}
+所列出的调用函数是@code{org-do-demote}，而在表格章节，则列出它的调用的函数为@code{org-table-move-column-right}。
 
 If you prefer, you can compile the manual without the command names by
 unsetting the flag @code{cmdnames} in @file{org.texi}.
+如果你喜欢，你可以通过取消文件@file{org.texi}中的标记@code{cmdnames}。
 
 @node 文档结构, 表格, 简介, Top
-@chapter Document structure
+@chapter 文档结构
 @cindex document structure
 @cindex structure of document
 
 Org is based on Outline mode and provides flexible commands to
 edit the structure of the document.
-
+Org基于Outline模式并提供灵活的命令来编辑文档的结构。
 @menu
-* Outlines::                    Org is based on Outline mode
-* Headlines::                   How to typeset Org tree headlines
-* Visibility cycling::          Show and hide, much simplified
-* Motion::                      Jumping to other headlines
-* Structure editing::           Changing sequence and level of headlines
-* Sparse trees::                Matches embedded in context
-* Plain lists::                 Additional structure within an entry
-* Drawers::                     Tucking stuff away
-* Blocks::                      Folding blocks
-* Footnotes::                   How footnotes are defined in Org's syntax
-* Orgstruct mode::              Structure editing outside Org
+* 大纲::                    Org is based on Outline modeOrg是基于Outline模式的
+* 标题::                   How to typeset Org tree headlines怎么排版Org的树状标题
+* 可视性循环::          Show and hide, much simplified显示与隐藏，就是这么简单
+* 移动::                      Jumping to other headlines跳转到其他标题
+* 结构编辑::           Changing sequence and level of headlines改变标题的顺序以及层级
+* 稀疏树::                Matches embedded in context在正文中匹配嵌入
+* Plain lists纯文本列表::                 Additional structure within an entry条目中的附加结构
+* Drawers抽屉::                     Tucking stuff away把东西藏起来
+* 块::                      Folding blocks把块折叠起来
+* 脚注::                   How footnotes are defined in Org's syntax Org语法中脚注怎么定义
+* Orgstruct mode::              Structure editing outside Org在Org以外进行结构编辑
 @end menu
 
-@node Outlines, Headlines, 文档结构, 文档结构
-@section Outlines
+@node 大纲, 标题, 文档结构, 文档结构
+@section 大纲
 @cindex outlines
 @cindex Outline mode
 
@@ -1127,9 +1170,14 @@ document to show only the general document structure and the parts
 currently being worked on.  Org greatly simplifies the use of
 outlines by compressing the entire show/hide functionality into a single
 command, @command{org-cycle}, which is bound to the @key{TAB} key.
+Org是在Outline模式之上实现的。大纲使得文档可以有层次地组织，这是笔记和想法
+最好的表达（起码对我来说是）。这些结构的概览是通过折叠（隐藏）大部分文档内
+容而只显示文档的大纲结构以及正在工作的部分内容。Org把全部隐藏/显示功能压缩
+到一个命令 @command{org-cycle} 并把它绑定到 @key{TAB} 键上，极大地简化了大
+大纲的操作。
 
-@node Headlines, Visibility cycling, Outlines, 文档结构
-@section Headlines
+@node 标题, 可视性循环, 大纲, 文档结构
+@section 标题
 @cindex headlines
 @cindex outline tree
 @vindex org-special-ctrl-a/e
@@ -1141,6 +1189,10 @@ start with one or more stars, on the left margin@footnote{See the variables
 @code{org-special-ctrl-a/e}, @code{org-special-ctrl-k}, and
 @code{org-ctrl-k-protect-subtree} to configure special behavior of @kbd{C-a},
 @kbd{C-e}, and @kbd{C-k} in headlines.}.  For example:
+标题定义了大纲树的结构。Org中的标题在左边边界以一个或者多个星号开头@footnote{
+参见变量 @code{org-special-ctrl-a/e}, @code{org-special-ctrl-k} 以及 @code{
+org-ctrl-k-protect-subtree} 来进行对 @kbd{C-a}, @kbd{C-e} 和 @kbd{C-k} 在标题中
+的特殊行为的配置。
 
 @example
 * Top level headline
@@ -1156,6 +1208,8 @@ start with one or more stars, on the left margin@footnote{See the variables
 @noindent Some people find the many stars too noisy and would prefer an
 outline that has whitespace followed by a single star as headline
 starters.  @ref{Clean view}, describes a setup to realize this.
+@noindent 有些人会觉得太多星星太过碍眼而倾向于那种一个星号跟着空格作为标题开头
+的大纲。@ref{Clean view}，描述了一个实现这样大纲的配置。
 
 @vindex org-cycle-separator-lines
 An empty line after the end of a subtree is considered part of it and
@@ -1163,9 +1217,13 @@ will be hidden when the subtree is folded.  However, if you leave at
 least two empty lines, one empty line will remain visible after folding
 the subtree, in order to structure the collapsed view.  See the
 variable @code{org-cycle-separator-lines} to modify this behavior.
+在子树后面的一个空行被认为是子树的一部分，在子树被折叠起来的时候将会被隐藏。
+然后如果子树后面跟了最少两个空行，则在子树被折叠的时候会有一个空行保持可见，
+用来结构化折叠视图。参见变量 @code{org-cycle-separator-lines} 来改变这一行
+为。
 
-@node Visibility cycling, Motion, Headlines, 文档结构
-@section Visibility cycling
+@node 可视性循环, 移动, 标题, 文档结构
+@section 可视性循环
 @cindex cycling, visibility
 @cindex visibility cycling
 @cindex trees, visibility
@@ -1175,6 +1233,8 @@ variable @code{org-cycle-separator-lines} to modify this behavior.
 Outlines make it possible to hide parts of the text in the buffer.
 Org uses just two commands, bound to @key{TAB} and
 @kbd{S-@key{TAB}} to change the visibility in the buffer.
+大纲使得缓冲区的部分文本可以被隐藏起来。Org 用两个命令来控制缓冲区文本的可见性，
+他们分别被绑定到 @key{TAB} 和 @kbd{S-@key{TAB}}两个快捷键上。
 
 @cindex subtree visibility states
 @cindex subtree cycling
@@ -1183,7 +1243,7 @@ Org uses just two commands, bound to @key{TAB} and
 @cindex subtree, subtree visibility state
 @table @asis
 @orgcmd{@key{TAB},org-cycle}
-@emph{Subtree cycling}: Rotate current subtree among the states
+@emph{子树循环}: Rotate current subtree among the states旋转当前子树的可视性状态
 
 @example
 ,-> FOLDED -> CHILDREN -> SUBTREE --.
@@ -1198,6 +1258,10 @@ beginning of the buffer and the first line is not a headline, then
 @key{TAB} actually runs global cycling (see below)@footnote{see the
 option @code{org-cycle-global-at-bob}.}.  Also when called with a prefix
 argument (@kbd{C-u @key{TAB}}), global cycling is invoked.
+光标必须在标题行中才能起作用@footnote{参见选项 @code{org-cycle-emulate-tab}}。当
+光标位于缓冲区开头并且第一行不是标题时，@key{TAB} 将进行全局循环（参见下面）@footnote{
+参见选项 @code{org-cycle-global-at-bob}}。当带参数前缀调用（@kbd{C-u @key{TAB}}）时，也
+会触发全局循环。
 
 @cindex global visibility states
 @cindex global cycling
@@ -1206,7 +1270,7 @@ argument (@kbd{C-u @key{TAB}}), global cycling is invoked.
 @cindex show all, global visibility state
 @orgcmd{S-@key{TAB},org-global-cycle}
 @itemx C-u @key{TAB}
-@emph{Global cycling}: Rotate the entire buffer among the states
+@emph{全局循环}: Rotate the entire buffer among the states旋转整个缓冲区的可视性状态
 
 @example
 ,-> OVERVIEW -> CONTENTS -> SHOW ALL --.
@@ -1216,10 +1280,12 @@ argument (@kbd{C-u @key{TAB}}), global cycling is invoked.
 When @kbd{S-@key{TAB}} is called with a numeric prefix argument N, the
 CONTENTS view up to headlines of level N will be shown.  Note that inside
 tables, @kbd{S-@key{TAB}} jumps to the previous field.
+当 @kbd{S-@key{TAB}} 被带有数字N调用时，则到底N层标题的内容都会被显示出来。
+注意当在表格中，@kbd{S-@key{TAB}} 是跳到前面一个域。
 
 @cindex show all, command
 @orgcmd{C-u C-u C-u @key{TAB},show-all}
-Show all, including drawers.
+Show all, including drawers.显示所有东西，包括抽屉。
 @orgcmd{C-c C-r,org-reveal}
 Reveal context around point, showing the current entry, the following heading
 and the hierarchy above.  Useful for working near a location that has been
@@ -1227,23 +1293,34 @@ exposed by a sparse tree command (@pxref{Sparse trees}) or an agenda command
 (@pxref{Agenda commands}).  With a prefix argument show, on each
 level, all sibling headings.  With double prefix arg, also show the entire
 subtree of the parent.
+显露光标附近的正文，显示当前条目，紧跟着以及上一级的标题。在被稀疏树命令（@pxref{Sparse trees}）
+或者议程命令（@pxref{Agenda commands}）所暴露出来的位置使用尤其有效。带一个前缀参数时在每一层显示
+显示所有兄弟标题。带两个前缀参数时同样显示父标题的所有子树。
+
+
 @orgcmd{C-c C-k,show-branches}
 Expose all the headings of the subtree, CONTENT view for just one subtree.
+显露子树的所有标题，只对一个子树生效。
 @orgcmd{C-c C-x b,org-tree-to-indirect-buffer}
 Show the current subtree in an indirect buffer@footnote{The indirect
 buffer
+在一个非直接缓冲区中显示当前子树@footnote{非直接缓冲区
 @ifinfo
 (@pxref{Indirect Buffers,,,emacs,GNU Emacs Manual})
 @end ifinfo
 @ifnotinfo
-(see the Emacs manual for more information about indirect buffers)
+(see the Emacs manual for more information about indirect buffers参见Emacs用户手册以了解更多关于非直接缓冲区的信息)
 @end ifnotinfo
 will contain the entire buffer, but will be narrowed to the current
 tree.  Editing the indirect buffer will also change the original buffer,
-but without affecting visibility in that buffer.}.  With a numeric
+but without affecting visibility in that buffer.包含整个缓冲区，但会被限制只显示当前子树的内容。编辑非直接缓冲区同样也会
+改变原缓冲区的内容，不过不会影响缓冲区的可视性}.  With a numeric
 prefix argument N, go up to level N and then take that tree.  If N is
 negative then go up that many levels.  With a @kbd{C-u} prefix, do not remove
 the previously used indirect buffer.
+如果带数字前缀N执行该命令，如果N是正数且比当前光标所在的层次小，则向上到第N层并把该子树显示到非直接缓冲区里；如果N是正数并且比
+光标所在的层次大，则不移动直接把当前子树显示到非直接缓冲区。如果N为负值，则向上移动-N层然后把
+所在的子树显示到非直接缓冲区里。@kbd{C-u} 前缀不会删除前面用过的非直接缓冲区。
 @end table
 
 @vindex org-startup-folded
@@ -1257,7 +1334,9 @@ OVERVIEW, i.e.@: only the top level headlines are visible.  This can be
 configured through the variable @code{org-startup-folded}, or on a
 per-file basis by adding one of the following lines anywhere in the
 buffer:
-
+当Emacs第一次访问一个Org文件时，全局状态被设置为OVERVIEW，也就是说只能看到
+最顶层的标题。这个行为可以通过变量 @code{org-startup-folded} 进行配置，或者
+基于每个文件在缓冲区中任何地方加入下面几行中的任一行。
 @example
 #+STARTUP: overview
 #+STARTUP: content
@@ -1271,55 +1350,63 @@ Furthermore, any entries with a @samp{VISIBILITY} property (@pxref{Properties
 and Columns}) will get their visibility adapted accordingly.  Allowed values
 for this property are @code{folded}, @code{children}, @code{content}, and
 @code{all}.
+此外，任何包含 @samp{VISIBILITY} 属性（@pxref{Properties and Columns}）的条目都会根据相应的值
+来设置它的可见性。这个属性可能的值为 @code{folded}，@code{children}，@code{content}以及@code{all}。
 @table @asis
 @orgcmd{C-u C-u @key{TAB},org-set-startup-visibility}
 Switch back to the startup visibility of the buffer, i.e.@: whatever is
 requested by startup options and @samp{VISIBILITY} properties in individual
 entries.
+切换回缓冲区的初始可见性，也就是无论是启动选项所要求还是各条目@samp{VISIBILITY}属性所指定的。
 @end table
 
-@node Motion, Structure editing, Visibility cycling, 文档结构
-@section Motion
+@node 移动, 结构编辑, 可视性循环, 文档结构
+@section 移动
 @cindex motion, between headlines
 @cindex jumping, to headlines
 @cindex headline navigation
 The following commands jump to other headlines in the buffer.
+以下命令会跳转到缓冲区的其他标题。
 
 @table @asis
 @orgcmd{C-c C-n,outline-next-visible-heading}
-Next heading.
+下一个标题
 @orgcmd{C-c C-p,outline-previous-visible-heading}
-Previous heading.
+上一个标题.
 @orgcmd{C-c C-f,org-forward-same-level}
-Next heading same level.
+下一个同级标题
 @orgcmd{C-c C-b,org-backward-same-level}
-Previous heading same level.
+上一个同级标题
 @orgcmd{C-c C-u,outline-up-heading}
-Backward to higher level heading.
+回到上一级标题
 @orgcmd{C-c C-j,org-goto}
 Jump to a different place without changing the current outline
 visibility.  Shows the document structure in a temporary buffer, where
 you can use the following keys to find your destination:
+在不改变当前大纲可见性的前提下跳转到另外的位置。在显示文档结构的临时缓冲区
+里可以使用下面的这些键来找到你要跳转到的地方：
 @vindex org-goto-auto-isearch
 @example
-@key{TAB}         @r{Cycle visibility.}
-@key{down} / @key{up}   @r{Next/previous visible headline.}
-@key{RET}         @r{Select this location.}
-@kbd{/}           @r{Do a Sparse-tree search}
+@key{TAB}         @r{可视性循环}
+@key{down} / @key{up}   @r{下一个/前一个可见的标题}
+@key{RET}         @r{选择当前位置}
+@kbd{/}           @r{进行稀疏树查询}
 @r{The following keys work if you turn off @code{org-goto-auto-isearch}}
-n / p        @r{Next/previous visible headline.}
-f / b        @r{Next/previous headline same level.}
-u            @r{One level up.}
-0-9          @r{Digit argument.}
-q            @r{Quit}
+@r{如果关掉 @code{org-goto-auto-isearch}，一下这些键会起作用}
+n / p        @r{下一个/上一个可见标题。}
+f / b        @r{下一个/上一个可见同级标题。}
+u            @r{向上一级}
+0-9          @r{数字参数}
+q            @r{退出}
 @end example
 @vindex org-goto-interface
 @noindent
 See also the variable @code{org-goto-interface}.
+参见变量 @code{org-goto-interface}。
 @end table
 
-@node Structure editing, Sparse trees, Motion, 文档结构
-@section Structure editing
+@node 结构编辑, 稀疏树, 移动, 文档结构
+@section 结构编辑
 @cindex structure editing
 @cindex headline, promotion and demotion
 @cindex promotion, of subtrees
@@ -1345,39 +1432,38 @@ If at the beginning of any other line, the content of that line is made the
 new heading.  If the command is used at the end of a folded subtree (i.e.@:
 behind the ellipses at the end of a headline), then a headline like the
 current one will be inserted after the end of the subtree.
+插入与当前标题同级的标题。如果光标是位于简单列表的条目上，则会建立一个新条目（@pxref{Plain lists}）。
+可以使用前缀参数来强制生成新的标题。如果在一标题行的中间使用本命令，则这行会分成两行，光标以后部分将变成
+同级新标题@footnote{如果你不想分开，可以定制变量 @code{org-M-RET-may-split-line}。}。如果是在标题行行首使用本命令，则在当前行之前建立新标题。如果是非标题行行首使用，则本行内容变为新标题。如果在折叠子树的行尾使用，则会在子树的后面建立一个类似当前的标题。
 @orgcmd{C-@key{RET},org-insert-heading-respect-content}
 Just like @kbd{M-@key{RET}}, except when adding a new heading below the
 current heading, the new heading is placed after the body instead of before
 it.  This command works from anywhere in the entry.
+类似于 @kbd{M-@key{RET}}，只是当在当前标题下面增加新标题时，新标题会被放在当前子树之后而不是之前。本命令可以在条目内任何地方起作用。
 @orgcmd{M-S-@key{RET},org-insert-todo-heading}
 @vindex org-treat-insert-todo-heading-as-state-change
-Insert new TODO entry with same level as current heading.  See also the
-variable @code{org-treat-insert-todo-heading-as-state-change}.
+插入与当前标题同级的TODO条目。参见变量 @code{org-treat-insert-todo-heading-as-state-change}。
 @orgcmd{C-S-@key{RET},org-insert-todo-heading-respect-content}
-Insert new TODO entry with same level as current heading.  Like
-@kbd{C-@key{RET}}, the new headline will be inserted after the current
-subtree.
+插入语当前标题同级的TODO条目，类似@kbd{C-@key{RET}}，新标题将会插入在当前子树之后。
 @orgcmd{@key{TAB},org-cycle}
-In a new entry with no text yet, the first @key{TAB} demotes the entry to
-become a child of the previous one.  The next @key{TAB} makes it a parent,
-and so on, all the way to top level.  Yet another @key{TAB}, and you are back
-to the initial level.
+在一个新的没有文本的条目里，第一次 @key{TAB} 使是它级别下降一层，再按一次 @key{TAB} 使他级别往上一层，以此类推直到最顶层。然后再按一次 @key{TAB} 又回到初始的级别。
 @orgcmd{M-@key{left},org-do-promote}
-Promote current heading by one level.
+把当前标题级别提升一级。
 @orgcmd{M-@key{right},org-do-demote}
-Demote current heading by one level.
+把当前标题级别下降一级。.
 @orgcmd{M-S-@key{left},org-promote-subtree}
-Promote the current subtree by one level.
+把当前子树提升一级。
 @orgcmd{M-S-@key{right},org-demote-subtree}
-Demote the current subtree by one level.
-@orgcmd{M-S-@key{up},org-move-subtree-up}
-Move subtree up (swap with previous subtree of same
-level).
-@orgcmd{M-S-@key{down},org-move-subtree-down}
-Move subtree down (swap with next subtree of same level).
+把当前子树下降一级。
+@orgcmd{M-S-@key{up},org-move-subtree-
+向上移动子树（与前一个同级子树交换位置）
+@orgcmd{M-S-@key{down},org-move-subtree-
+向下移动子树（与下一个同级子树交换位置）
 @orgcmd{C-c C-x C-w,org-cut-subtree}
 Kill subtree, i.e.@: remove it from buffer but save in kill ring.
 With a numeric prefix argument N, kill N sequential subtrees.
+杀掉子树，也就是说把它从当前缓冲区删除但保存在kill ring里面。
+带前缀数字参数N时，杀掉后续的N个子树。
 @orgcmd{C-c C-x M-w,org-copy-subtree}
 Copy subtree to kill ring.  With a numeric prefix argument N, copy the N
 sequential subtrees.
