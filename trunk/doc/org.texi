@@ -864,7 +864,7 @@ directories where local Lisp and Info files are kept.  If you don't have
 access to the system-wide directories, you can simply run Org directly from
 the distribution directory by adding the @file{lisp} subdirectory to the
 Emacs load path.  To do this, add the following line to @file{.emacs}:
-如果你是从网络上下载Org的，无论是发行版@file.{.zip}或@file.{zip}文件，还是Git档案库，
+如果你是从网络上下载Org的，无论是发行版@file{.zip}或@file{.zip}文件，还是Git档案库，
 你需要进行一下步骤进行安装：进入解压出来的目录编辑文件@file{Makefile}最上面一节。指定 Emacs
 执行文件的名字（一般不是@file{emacs}就是@file{xemacs})，以及本地Lisp和Info文件所在的目录。如果
 你没有权限访问系统目录，你可以通过把子目录@file{lisp}添加到Emacs的装载路径（load-path）中然后
@@ -893,7 +893,7 @@ make
 @noindent If you are running Org from the distribution directory, this is
 all.  If you want to install Org into the system directories, use (as
 administrator)
-@noident 如果你是在发行目录运行Org，到这就完成了。如果你需要把Org安装到系统目录中，以管理员身份
+@noindent 如果你是在发行目录运行Org，到这就完成了。如果你需要把Org安装到系统目录中，以管理员身份
 运行一下命令。
 
 @example
@@ -1010,7 +1010,7 @@ list after a moderator has approved it@footnote{Please consider subscribing
 to the mailing list, in order to minimize the work the mailing list
 moderators have to do.}.
 如果你发现任何Org的问题，或者你有任何关于它的疑问，评论或者想法，请发送邮件
-到Org的邮件列表 @email{emacs-orgmode@gnu.org}。如果你不是邮件列表的成员，你
+到Org的邮件列表 @email{emacs-orgmode@@gnu.org}。如果你不是邮件列表的成员，你
 的邮件将会在筛选人批准后投递到列表里@footnote{请考虑订阅邮件列表以减少筛选人
 的工作量}。
 
@@ -1023,7 +1023,7 @@ version information of Emacs (@kbd{M-x emacs-version @key{RET}}) and Org
 @file{.emacs}.  The easiest way to do this is to use the command
 报告BUGS前，请先使用最新的Org版本重现这个BUG————如果你使用的是过时的版本，很有
 可能BUG已经被修复。如果BUG依然存在，请准备一份提供尽可能多信息的报告，包括Emacs
-的版本信息(@kdb{M-x emacs-version @key{RET}})以及Org版本(@kbd{M-x org-version @key{RET}}),
+的版本信息(@kbd{M-x emacs-version @key{RET}})以及Org版本(@kbd{M-x org-version @key{RET}}),
 还有@file{.emacs}中Org相关的设置。最方便的做法是运用命令
 @example
 @kbd{M-x org-submit-bug-report}
@@ -1090,7 +1090,7 @@ When you hit the error, a @file{*Backtrace*} buffer will appear on the
 screen.  Save this buffer to a file (for example using @kbd{C-x C-w}) and
 attach it to your bug report.
 当你碰到错误时，屏幕会出现一个 @file{*Backtrace*}的缓冲区。把这个缓冲区
-保存到一个文件（例如用 @kdb{C-x C-w}）并附在你的bug报告中。
+保存到一个文件（例如用 @kbd{C-x C-w}）并附在你的bug报告中。
 @end enumerate
 
 @node 约定,  , 反馈, 简介
@@ -1192,7 +1192,7 @@ start with one or more stars, on the left margin@footnote{See the variables
 标题定义了大纲树的结构。Org中的标题在左边边界以一个或者多个星号开头@footnote{
 参见变量 @code{org-special-ctrl-a/e}, @code{org-special-ctrl-k} 以及 @code{
 org-ctrl-k-protect-subtree} 来进行对 @kbd{C-a}, @kbd{C-e} 和 @kbd{C-k} 在标题中
-的特殊行为的配置。
+的特殊行为的配置}。例如：
 
 @example
 * Top level headline
@@ -1302,8 +1302,6 @@ subtree of the parent.
 Expose all the headings of the subtree, CONTENT view for just one subtree.
 显露子树的所有标题，只对一个子树生效。
 @orgcmd{C-c C-x b,org-tree-to-indirect-buffer}
-Show the current subtree in an indirect buffer@footnote{The indirect
-buffer
 在一个非直接缓冲区中显示当前子树@footnote{非直接缓冲区
 @ifinfo
 (@pxref{Indirect Buffers,,,emacs,GNU Emacs Manual})
@@ -1450,14 +1448,14 @@ it.  This command works from anywhere in the entry.
 @orgcmd{M-@key{left},org-do-promote}
 把当前标题级别提升一级。
 @orgcmd{M-@key{right},org-do-demote}
-把当前标题级别下降一级。.
+把当前标题级别下降一级。
 @orgcmd{M-S-@key{left},org-promote-subtree}
 把当前子树提升一级。
 @orgcmd{M-S-@key{right},org-demote-subtree}
 把当前子树下降一级。
-@orgcmd{M-S-@key{up},org-move-subtree-
+@orgcmd{M-S-@key{up},org-move-subtree-up}
 向上移动子树（与前一个同级子树交换位置）
-@orgcmd{M-S-@key{down},org-move-subtree-
+@orgcmd{M-S-@key{down},org-move-subtree-down}
 向下移动子树（与下一个同级子树交换位置）
 @orgcmd{C-c C-x C-w,org-cut-subtree}
 Kill subtree, i.e.@: remove it from buffer but save in kill ring.
