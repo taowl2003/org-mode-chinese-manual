@@ -1037,7 +1037,7 @@ from within Emacs, please copy and paste the content into your Email program.
 If an error occurs, a backtrace can be very useful (see below on how to
 create one).  Often a small example file helps, along with clear information
 about:
-出现错误时，回溯信息很重要（可以参照下面建立）。通常一个包含以下信息的示例文件
+出现错误时，回溯信息很重要（参照下面如何建立回溯）。通常一个包含以下信息的示例文件
 会有很大帮助。
 
 
@@ -1432,7 +1432,9 @@ behind the ellipses at the end of a headline), then a headline like the
 current one will be inserted after the end of the subtree.
 插入与当前标题同级的标题。如果光标是位于简单列表的条目上，则会建立一个新条目（@pxref{Plain lists}）。
 可以使用前缀参数来强制生成新的标题。如果在一标题行的中间使用本命令，则这行会分成两行，光标以后部分将变成
-同级新标题@footnote{如果你不想分开，可以定制变量 @code{org-M-RET-may-split-line}。}。如果是在标题行行首使用本命令，则在当前行之前建立新标题。如果是非标题行行首使用，则本行内容变为新标题。如果在折叠子树的行尾使用，则会在子树的后面建立一个类似当前的标题。
+同级新标题@footnote{如果你不想分开，可以定制变量 @code{org-M-RET-may-split-line}。}。如果是在标题
+行行首使用本命令，则在当前行之前建立新标题。如果是非标题行行首使用，则本行内容变为新标题。如果在折叠子
+树的行尾使用，则会在子树的后面建立一个类似当前的标题。
 @orgcmd{C-@key{RET},org-insert-heading-respect-content}
 Just like @kbd{M-@key{RET}}, except when adding a new heading below the
 current heading, the new heading is placed after the body instead of before
@@ -1463,13 +1465,13 @@ With a numeric prefix argument N, kill N sequential subtrees.
 杀掉子树，也就是说把它从当前缓冲区删除但保存在kill ring里面。
 带前缀数字参数N时，杀掉后续的N个子树。
 @orgcmd{C-c C-x M-w,org-copy-subtree}
-Copy subtree to kill ring.  With a numeric prefix argument N, copy the N
-sequential subtrees.
+把子树复制到kill ring。带数字参数N调用时，则把后续N个子树复制到kill ring中。
 @orgcmd{C-c C-x C-y,org-paste-subtree}
 Yank subtree from kill ring.  This does modify the level of the subtree to
 make sure the tree fits in nicely at the yank position.  The yank level can
 also be specified with a numeric prefix argument, or by yanking after a
 headline marker like @samp{****}.
+从kill ring中粘贴子树。子树粘贴后的层级会根据插入点的位置而改变。粘贴后的层级也可以用过参数前缀改变，或者粘贴在标题标志之后，例如@samp{****}。
 @orgcmd{C-y,org-yank}
 @vindex org-yank-adjusted-subtrees
 @vindex org-yank-folded-subtrees
@@ -1483,55 +1485,46 @@ previously visible.  Any prefix argument to this command will force a normal
 force a normal yank is @kbd{C-u C-y}.  If you use @code{yank-pop} after a
 yank, it will yank previous kill items plainly, without adjustment and
 folding.
+根据变量 @code{org-yank-adjusted-subtree} 和 @code{org-yank-folded-subtree}，Org内部
+命令 @code{yank} 会用同样的命令 @kbd{C-c C-x C-y} 只能地粘贴子树。缺省情况下，不会进行层级调整，但是粘贴后的子树
+是折叠着的除非这样作会吞掉本来可见的文本。带任何参数执行这个命令都会导致 @code{yank} 被强制带着参数执行。一个好的执行
+一般粘贴的途径是 @kbd{C-u C-y}。如果你在一个粘贴之后执行 @code{yank-pop}，则前一个被杀掉的内容会不经调整和折叠直接
+被粘贴。
 @orgcmd{C-c C-x c,org-clone-subtree-with-time-shift}
 Clone a subtree by making a number of sibling copies of it.  You will be
 prompted for the number of copies to make, and you can also specify if any
 timestamps in the entry should be shifted.  This can be useful, for example,
 to create a number of tasks related to a series of lectures to prepare.  For
 more details, see the docstring of the command
-@code{org-clone-subtree-with-time-shift}.
+克隆一个子树并生成一定数量的兄弟副本。你可以指定副本的数量，还可以指定时间戳。这在建立一定数量关于系列演讲准备工作的任务时特别有用。
+详细情况见命令 @code{org-clone-subtree-with-time-shift} 的描述文本。
 @orgcmd{C-c C-w,org-refile}
-Refile entry or region to a different location.  @xref{Refiling notes}.
+转发条目或者选定区域到不同的位置。@xref{Refiling notes}.
 @orgcmd{C-c ^,org-sort-entries-or-items}
-Sort same-level entries.  When there is an active region, all entries in the
-region will be sorted.  Otherwise the children of the current headline are
-sorted.  The command prompts for the sorting method, which can be
-alphabetically, numerically, by time (first timestamp with active preferred,
-creation time, scheduled time, deadline time), by priority, by TODO keyword
-(in the sequence the keywords have been defined in the setup) or by the value
-of a property.  Reverse sorting is possible as well.  You can also supply
-your own function to extract the sorting key.  With a @kbd{C-u} prefix,
-sorting will be case-sensitive.  With two @kbd{C-u C-u} prefixes, duplicate
-entries will also be removed.
+同级条目排序。当存在活动区域时，所有区域内的条目被排序。否则就是当前标题的子标题被排序。
+命令会提示排序的方式，可以按字母，数字，时间（时间戳，建立时间，安排时间，截至时间），优先级，TODO关键字（按设定的关键字序列）或者属性的值。也可进行逆序排列。你还可以提供自定义的函数来对所抽取的关键字进行排列。带一个 @kbd{C-u} 前缀执行，进行大小写敏感排序。
+带两个 @kbd{C-u} 则会删除重复的条目。
 @orgcmd{C-x n s,org-narrow-to-subtree}
-Narrow buffer to current subtree.
+限制缓冲区只显示当前子树。
 @orgcmd{C-x n b,org-narrow-to-block}
-Narrow buffer to current block.
+限制缓冲区只显示当前块。
 @orgcmd{C-x n w,widen}
-Widen buffer to remove narrowing.
+取消缓冲区的上述限制。
 @orgcmd{C-c *,org-toggle-heading}
-Turn a normal line or plain list item into a headline (so that it becomes a
-subheading at its location).  Also turn a headline into a normal line by
-removing the stars.  If there is an active region, turn all lines in the
-region into headlines.  If the first line in the region was an item, turn
-only the item lines into headlines.  Finally, if the first line is a
-headline, remove the stars from all headlines in the region.
+把一般文本行或者普通列表条目变成标题（变为所在位置的子标题）。同样它也会删除标题前面的星号把它变成普通文本行。
+如果存在活动的选定区域，则把区域中的所有行都变成标题。如果区域中的首行是一个条目，则只把条目下的行变成标题。最后，
+如果首行是一个标题，则把区域中所有标题的星号删除。
 @end table
 
 @cindex region, active
 @cindex active region
 @cindex transient mark mode
-When there is an active region (Transient Mark mode), promotion and
-demotion work on all headlines in the region.  To select a region of
-headlines, it is best to place both point and mark at the beginning of a
-line, mark at the beginning of the first headline, and point at the line
-just after the last headline to change.  Note that when the cursor is
-inside a table (@pxref{Tables}), the Meta-Cursor keys have different
-functionality.
+当存在活动的选定区域时（Transient Mark模式），提升或者降级都会作用在选定区域中的所有标题。选定一个区域的标题，最好是把标记把
+区域开始标志设定在第一个标题的行首，把光标放在最后一个标题的行末。主义当光标位于表格里面时（@pxref{Tables}），Meta＋光标键有着
+不同的功能。
 
-
-@node Sparse trees, Plain lists, Structure editing, 文档结构
-@section Sparse trees
+@node 稀疏树, 普通列表, 结构编辑, 文档结构
+@section 稀疏树
 @cindex sparse trees
 @cindex trees, sparse
 @cindex folding, sparse trees
@@ -1541,21 +1534,18 @@ functionality.
 @vindex org-show-following-heading
 @vindex org-show-siblings
 @vindex org-show-entry-below
-An important feature of Org-mode is the ability to construct @emph{sparse
-trees} for selected information in an outline tree, so that the entire
-document is folded as much as possible, but the selected information is made
-visible along with the headline structure above it@footnote{See also the
-variables @code{org-show-hierarchy-above}, @code{org-show-following-heading},
-@code{org-show-siblings}, and @code{org-show-entry-below} for detailed
-control on how much context is shown around each match.}.  Just try it out
-and you will see immediately how it works.
+Org-mode一个重要的功能是可以根据大纲结构树里选定的信息构造 @emph{稀疏树}，这样整个文档就可以尽可能的被折叠起来但是选定的信息
+以及它们上面的标题则保持可见@footnote{参见变量@code{org-show-hierarchy-above}, @code{org-show-following-heading},
+@code{org-show-siblings}和 @code{org-show-entry-below}看怎样控制每次多少正文会被显示。}。试一下你就可以看到它到底是怎么工作的了。
 
 Org-mode contains several commands creating such trees, all these
 commands can be accessed through a dispatcher:
+Org-mode有几个命令用来创建这种树，所有这些命令都可以通过一个调度器访问：
 
 @table @asis
 @orgcmd{C-c /,org-sparse-tree}
 This prompts for an extra key to select a sparse-tree creating command.
+这会提示一个额外的键以选择一个稀疏树创建命令。
 @orgcmd{C-c / r,org-occur}
 @vindex org-remove-highlights-with-change
 Occur.  Prompts for a regexp and shows a sparse tree with all matches.  If
@@ -1568,10 +1558,15 @@ editing command@footnote{This depends on the option
 @code{org-remove-highlights-with-change}}, or by pressing @kbd{C-c C-c}.
 When called with a @kbd{C-u} prefix argument, previous highlights are kept,
 so several calls to this command can be stacked.
+提示需要输入正则表达式并显示所有匹配的稀疏树。如果匹配的部分在标题里，则标题变为可见。
+如果匹配是在一个条目的主体里，则标题和主体都变得可见。为了提供最少量的上下文，除了显
+示匹配的标题外，还显示所匹配标题以上的所有层级的标题。每个匹配都会被高亮显示；当缓冲
+区被编辑后或者按了 @kbd{C-c C-c} 后高亮消失@footnote{这跟选项 @code{org-remove-hightlights-with-change}有关}。
+当带前缀 @kbd{C-u} 调用时，前面的高亮会被保留，所以多个命令可以被叠加。
 @orgcmdkkc{M-g n,M-g M-n,next-error}
-Jump to the next sparse tree match in this buffer.
+跳转到本缓冲区的下一个匹配的稀疏树。
 @orgcmdkkc{M-g p,M-g M-p,previous-error}
-Jump to the previous sparse tree match in this buffer.
+跳转到本缓冲区的上一个匹配的稀疏树。
 @end table
 
 
@@ -1582,7 +1577,9 @@ use the variable @code{org-agenda-custom-commands} to define fast
 keyboard access to specific sparse trees.  These commands will then be
 accessible through the agenda dispatcher (@pxref{Agenda dispatcher}).
 For example:
-
+对于特定搜索字符串的常用稀疏树，可以使用变量 @code{org-agenda-custom-commands}
+定义快速访问这些稀疏树的快捷键。然后这些命令就可以通过议程配送器访问（@pxref{Agenda dispatcher}）。
+例如：
 @lisp
 (setq org-agenda-custom-commands
       '(("f" occur-tree "FIXME")))
@@ -1590,9 +1587,13 @@ For example:
 
 @noindent will define the key @kbd{C-c a f} as a shortcut for creating
 a sparse tree matching the string @samp{FIXME}.
+@noindent 把 @kbd{C-c a f} 定义为建立匹配字符串 @samp{FIXME} 的稀疏树的
+快捷方式。
 
 The other sparse tree commands select headings based on TODO keywords,
 tags, or properties and will be discussed later in this manual.
+其他基于TODO关键字，标签或者属性来选择标题的稀疏树命令将会在接下来陆续
+讨论。
 
 @kindex C-c C-e v
 @cindex printing sparse trees
@@ -1603,9 +1604,12 @@ of the document @footnote{This does not work under XEmacs, because
 XEmacs uses selective display for outlining, not text properties.}.
 Or you can use the command @kbd{C-c C-e v} to export only the visible
 part of the document and print the resulting file.
-
-@node Plain lists, Drawers, Sparse trees, 文档结构
-@section Plain lists
+要打印稀疏树，可以用Emacs命令 @code{ps-print-buffer-with-faces}，它不会
+打印文档中不可见的部分@footnote{这对XEmacs不成立，因为XEmacs对大纲是是
+通过选择来显示，而不是通过文本属性。}。或者你可以通过命令 @kbd{C-c C-e v}
+导出可见部分然后打印。
+@node 普通列表, 抽屉, 稀疏树, 文档结构
+@section 普通列表
 @cindex plain lists
 @cindex lists, plain
 @cindex lists, ordered
@@ -1615,8 +1619,11 @@ Within an entry of the outline tree, hand-formatted lists can provide
 additional structure.  They also provide a way to create lists of checkboxes
 (@pxref{Checkboxes}).  Org supports editing such lists, and every exporter
 (@pxref{Exporting}) can parse and format them.
-
+在结构树的一个条目里面，手动格式列表可以提供附加的结构。他们同时提供一个
+建立复选框的方法（@pxref{Checkboxes}）。Org支持这类列表的编辑，所有导出器（@pxref{Exporting}）
+都可以解析以及格式化它们。
 Org knows ordered lists, unordered lists, and description lists.
+Org认识有序列表，无序列表以及描述列表。
 @itemize @bullet
 @item
 @emph{Unordered} list items start with @samp{-}, @samp{+}, or
@@ -1626,6 +1633,10 @@ stars to get a clean outline view, plain list items starting with a star may
 be hard to distinguish from true headlines.  In short: even though @samp{*}
 is supported, it may be better to not use it for plain list items.}  as
 bullets.
+@emph{无序}列表条目以 @samp{-},@samp{+}或者@samp{*}@footnote{当使用@samp{*}时，
+必须要缩进否则会被作为最高级的标题。同样当你隐藏开头的星星来得到干净的大纲视图时，
+用星号开头的普通列表很难与真正的标题区别开来，长话短说：虽然普通列表支持 @samp{*}
+但是最好不要使用}开头。
 @item
 @vindex org-plain-list-ordered-item-terminator
 @vindex org-alphabetical-lists
@@ -1641,6 +1652,12 @@ with @code{[@@20]}@footnote{If there's a checkbox in the item, the cookie
 must be put @emph{before} the checkbox.  If you have activated alphabetical
 lists, you can also use counters like @code{[@@b]}.}.  Those constructs can
 be used in any item of the list in order to enforce a particular numbering.
+@emph{有序}列表以数字开头跟着一个点或者右括号@footnote{你可以通过配置@code{org-plain-list-ordered-item-terminator}把它们过滤出来}
+，例如 @samp{1.} 或者 @samp{1)}@footnote{你也可以通过配置 @code{org-alphabetical-lists} 得到
+@samp{A.}，@samp{a.}，@samp{a)}和@samp{A)}。为了避免与正文混淆，这被限制为一个字符，超过一个
+字符则自动切换回数字。}。如果你想列表从不同的值开始（例如20），让条目的文本以@code{[@@20]}开头@footnote{
+如果有复选框在条目里，这cookie必须放在复选框@emph{之前}。如果你激活了字母列表，你也可以使用
+类似@code{[@@b]}计数器。}。这些构造可以应用到任何列表以便强制性得到特定的编号。
 @item
 @emph{Description} list items are unordered list items, and contain the
 separator @samp{ :: } to distinguish the description @emph{term} from the
