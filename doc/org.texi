@@ -1662,6 +1662,7 @@ be used in any item of the list in order to enforce a particular numbering.
 @emph{Description} list items are unordered list items, and contain the
 separator @samp{ :: } to distinguish the description @emph{term} from the
 description.
+@emph{描述}列表条目是无序列表并且包含分隔符 @samp{ :: } 来区分描述 @emph{项}与描述内容。
 @end itemize
 
 Items belonging to the same list must have the same indentation on the first
@@ -1669,6 +1670,8 @@ line.  In particular, if an ordered list reaches number @samp{10.}, then the
 2--digit numbers must be written left-aligned with the other numbers in the
 list.  An item ends before the next line that is less or equally indented
 than its bullet/number.
+隶属于同一个列表的条目必须与第一行具有相同的缩进。通常，如果有序列表编号到了 @samp{10},
+那么两位数字必须与列表的其他序号左对齐。条目在下一行的缩进小于或者等于序号或者条目开头标记的缩进时结束。
 
 @vindex org-list-ending-method
 @vindex org-list-end-regexp
@@ -1680,6 +1683,10 @@ indented than items at top level.  It also ends before two blank
 lines@footnote{See also @code{org-empty-line-terminates-plain-lists}.}.  In
 that case, all items are closed.  For finer control, you can end lists with
 any pattern set in @code{org-list-end-regexp}.  Here is an example:
+有两种办法@footnote{你可以通过配置 @code{org-list-ending-method} 来禁用任何其中一种}可以用来结束列表。
+列表在所有条目结束后结束，也就是结束于任何缩进小于或者等于上一级条目的行。同时也会在后面跟着连续两行
+空行@footnote{参见 @code{org-empty-line-terminates-plain-list}。}时结束。在那种情况，所有条目都是封闭的。
+要更好的控制，你可以以任何 @code{org-list-end-regexp} 中的模式结束列表。下面是一个例子：
 
 @example
 @group
@@ -1707,6 +1714,10 @@ put into @file{.emacs}: @code{(require 'filladapt)}}, and by exporting them
 properly (@pxref{Exporting}).  Since indentation is what governs the
 structure of these lists, many structural constructs like @code{#+BEGIN_...}
 blocks can be indented to signal that they belong to a particular item.
+Org通过调整填充和换行命令来正确处理这些列表@footnote{Org在Emacs中只修改缩进设定。
+在XEmacs中，你需要用到 Kyle E. Jones 的@file{filladapt.el}。要打开它，在@file{.emacs}中加入
+@code{(require 'filladapt)}},同时把它们正确输出（@pxref{Exporting}）。由于缩进是控制这些列表
+东西，很多结构构造例如 @code{#-BEGIN_...} 块可以被缩进来表示它们属于特定的条目。
 
 @vindex org-list-demote-modify-bullet
 If you find that using a different bullet for a sub-list (than that used for
