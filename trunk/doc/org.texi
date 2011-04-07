@@ -1723,6 +1723,8 @@ Org通过调整填充和换行命令来正确处理这些列表@footnote{Org在E
 If you find that using a different bullet for a sub-list (than that used for
 the current list-level) improves readability, customize the variable
 @code{org-list-demote-modify-bullet}.
+如果你觉得子列表用与当前级别列表不同的列表符号可以提高可读性，可以配置变量
+@code{org-list-demote-modify-bullet}。
 
 @vindex org-list-automatic-rules
 The following commands act on items when the cursor is in the first line of
@@ -1730,6 +1732,9 @@ an item (the line with the bullet or number).  Some of them imply the
 application of automatic rules to keep list structure intact.  If some of
 these actions get in your way, configure @code{org-list-automatic-rules}
 to disable them individually.
+当光标位于条目的第一行（有列表符号或者数字那一行）时，下面的命令会作用于条目
+。其中一些命令意味着应用自动规则来保持列表结构完整。如果有某些命令让你感到不
+便，配置 @code{org-list-automatic-rules} 来单独禁止它们。
 
 @table @asis
 @orgcmd{@key{TAB},org-cycle}
@@ -1741,6 +1746,10 @@ the cursor is on a plain list item.  For more details, see the variable
 headlines.  The level of an item is then given by the
 indentation of the bullet/number.  Items are always subordinate to real
 headlines, however; the hierarchies remain completely separated.
+列表条目也可以像标题那样被折叠起来。通常这只能在光标位于普通列表条目时起作用。
+详细请参见变量 @code{org-cycle-include-plain-lists}。如果这个变量设为 @code{integrate}，
+普通列表条目将被当作会低级标题处理。条目的级别是由列表符号/数字的缩进量来给定的。列表
+条目总是附属于标题，这样层次可以保持完全分开。
 @orgcmd{M-@key{RET},org-insert-heading}
 @vindex org-M-RET-may-split-line
 @vindex org-list-automatic-rules
